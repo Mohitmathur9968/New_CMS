@@ -1,3 +1,6 @@
+<?php   require_once("DB.php"); ?>
+<?php   require_once("funtions.php");  ?>
+<?php   require_once("Session.php");  ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -89,7 +92,65 @@
 
 <section class= "container py-2 mb-4">
 
- 
+<div class= "container py-2 mb-4">
+<div class = "col-lg-12">
+
+    
+
+<div class= "container py-2 mb-4">
+<div class = "col-lg-12">
+
+    <table class = "table">
+       <thead class="thead-dark" > 
+      <tr>
+        <th>#</th>
+        <th>Title</th>
+        <th>Category</th>            
+        <th>Date&Time</th>
+        <th>Author</th>
+        <th>Banner</th>
+        <th>Comments</th>
+        <th>Action</th>
+        <th>Live preview</th>
+
+     </tr>
+     </thead>
+     <?php
+     
+        $sql = "SELECT * FROM post";
+        $stmt = $ConnectingDB->query($sql);
+          while($DataRows = $stmt->fetch()) 
+            {
+               $Id = $DataRows["ID"];
+               $DateTime = $DataRows["datetime"];
+               $PostTitle = $DataRows["title"];
+               $Category =  $DataRows["category"];
+               $Admin =  $DataRows["author"];
+               $Image = $DataRows["image"];
+               $PostText = $DataRows["post"];
+                    
+                 
+                  
+     ?><tbody>
+         <tr>
+             <td>#<td>
+             <td><?php echo $PostTitle ?></td>
+             <td><?php echo $Category ?></td>
+             <td><?php echo $DateTime ?></td>
+             <td><?php echo $Admin ?></td>
+             <td><?php echo $Image ?></td>
+             <td>Comments</td>
+             <td>Action</td>
+             <td>Live Preview</td>  
+         </tr>
+         </tbody>
+     <?php   } ?>
+      </table>   
+
+
+
+</div>
+</div>
 
 </section>
 

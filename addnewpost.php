@@ -9,7 +9,7 @@ if(isset($_POST["Submit"])){
  $Category = $_POST["Category"];
  $image = $_FILES["Image"]["name"];
  $Target = "Uploads/";//.basename($_Files["Image"]["name"]);
- $PostDescription = $_POST["Post"];
+ $PostDescription = $_POST["PostDescription"];
  $Admin = "Mohit";
 
  date_default_timezone_set("Asia/Mumbai");
@@ -29,6 +29,8 @@ elseif (strlen($PostTitle)< 5){
     Redirect_to("addnewpost.php");
 }
    else{
+      // query to insert post into DB
+   global $ConnectingDB; 
    $sql = "INSERT INTO post(datetime,title,category,author,image,post)";
    $sql .= "VALUES(:dateTime,:Posttitle,:categoryName,:adminname,:imageName,:PostDescription)";
    $stmt = $ConnectingDB->prepare($sql);
@@ -43,10 +45,10 @@ elseif (strlen($PostTitle)< 5){
    
    if($Execute){
       $_SESSION["SuccessMessage"] = "Category Added Successfully";
-      Redirect_to("addnewpost.ph");
+      Redirect_to("addnewpost.php");
    }else{
            $_SESSION["ErrorMessage"] = "Try Again";
-      Redirect_to("addnewpost.ph");
+      Redirect_to("addnewpost.php");
    } 
    
 
@@ -137,7 +139,7 @@ elseif (strlen($PostTitle)< 5){
 <div class="card-body">
 <div class="form-group">
    <lable for="title"><span class="FieldInfo"></span>Post  Title :</lable>
-   <input class="form-control"type="text" name="PostTitle" id="Post" placeholder="Type title here">
+   <input class="form-control"type="text" name="PostTitle" id="PostTitle" placeholder="Type title here">
    </div>
    <div class="form-group">
    <lable for="categorytitle"><span class="FieldInfo"></span>Choose Category :</lable>
@@ -167,7 +169,7 @@ elseif (strlen($PostTitle)< 5){
 </div>
 <div class="form=group">
  <label for="Post"><span class="FieldInfo">Post: </span></label>
- <textarea class="form-control" id="Post" name="PostDescription" row="8" cols="80"></textarea>
+ <textarea class="form-control" id="PostDescription" name="PostDescription" row="8" cols="80"></textarea>
 </div>
    
 <div class="row">
