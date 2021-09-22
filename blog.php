@@ -1,3 +1,6 @@
+<?php   require_once("DB.php"); ?>
+<?php   require_once("funtions.php");  ?>
+<?php   require_once("Session.php");  ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +12,7 @@
    <title>Blog.com</title>
 </head>
 <body>
-   <div style="height: 10px; background-color: black;"></div>
+   <div style="height: 15px; background-color: black;"></div>
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
@@ -22,51 +25,79 @@
       
        <div class="collapse navbar-collapse" id="navBarCMS">
          <ul class="navbar-nav mr-auto">
+         
          <li class="nav-item">
-            <a href="MyProfile.php" class="nav-link"><i class="far fa-user text-success"></i>  My profile </a>
+            <a href="blog.php" class="nav-link">Home</a>
          </li>
          <li class="nav-item">
-            <a href="Dashboard.php" class="nav-link">DashBoard</a>
+            <a href="#" class="nav-link">About Us</a>
          </li>
          <li class="nav-item">
-            <a href="Post.php" class="nav-link">Post</a>
+            <a href="blog.php" class="nav-link">Blog</a>
          </li>
          <li class="nav-item">
-            <a href="Categories.php" class="nav-link">Categories</a>
+            <a href="#" class="nav-link">Contact Us</a>
          </li>
          <li class="nav-item">
-            <a href="Admins.php" class="nav-link">Manage Admins</a>
+            <a href="blog.php" class="nav-link">Feature</a>
          </li>
-         <li class="nav-item">
-            <a href="Comments.php" class="nav-link">Comments</a>
-         </li>
-         <li class="nav-item">
-            <a href="Blogs.php?page=1" class="nav-link">Live Blogs</a>
-         </li>
+      
 
       </ul> 
    </div>
       <ul class="navbar-nav ml-auto">
-         <li class="nav-item">
-            <a href="Logout.php" class="nav-link"><i class="fas fa-sign-out-alt text-danger"></i> Logout</a>
-         </li>
+         <form  class = "form-inline" action="blog.php">
+             <div class ="form-group"></div>
+
+             <input class = "form-control mr-2" type="text" name = "Search" placeholder ="Type here" value ="" >
+             <button type = "button" class = "btn btn-primary" name = "SearchButton">Go</button>
+
+             </form>
       </ul>
       
    </div>
    </nav>
    <div style="height: 10px; background-color: black;"></div>
     <!--Navbar End-->
-<header class="bg-dark text-white py-3">
-   <div class="container">
-      <div class="row">
-         <div class="col-md-12">
-            
+    <!-- Header starts -->
+    <div class = "container">
+        <div class = "row mt-4">
+            <div class = "col-sm-8">
+         <?php
+         global $ConnectingDB;
+         $sql = "SELECT * FROM post";
+         $stmt =$ConnectingDB->query($sql);
+         while($DataRows = $stmt->fetch())
+          {
+             $PostId = $DataRows["ID"];
+             $DateTime = $DataRows["datetime"];
+             $PostTitle = $DataRows["title"];
+             $Category = $DataRows["category"];
+             $Admin = $DataRows["author"];
+             $Image = $DataRows["image"];
+             $PostDescription = $DataRows["post"];   
+          
+          }
          
          
-      </div>
-   </div>
-</header>
+         ?>
+         <div class = "card">
+             <div class = "card-body">
+                 <h4 class = "card-title"><?php echo $PostTitle ?></h4>
+                 <small>Written by <?php echo $Admin ?> On <?php  echo $DateTime ?></small>
+                 <hr>
+               <p> <?php echo $PostDescription  ?></p>
+                </div>
+         </div>
+            </div>
+         <!-- Main area -->
+         
+         
+            <div class = "col-sm-4">
 
+            </div>
+        </div>
+    </div>
 
 
     

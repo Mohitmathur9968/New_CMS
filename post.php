@@ -100,10 +100,11 @@
 <div class= "container py-2 mb-4">
 <div class = "col-lg-12">
 
-    <table class = "table">
-       <thead class="thead-dark" > 
+    <table class = "table table-striped table-hover">
+       <thead class="table-dark" > 
       <tr>
         <th>#</th>
+        <th>ID</th>
         <th>Title</th>
         <th>Category</th>            
         <th>Date&Time</th>
@@ -119,6 +120,7 @@
      
         $sql = "SELECT * FROM post";
         $stmt = $ConnectingDB->query($sql);
+        $SR = 0;
           while($DataRows = $stmt->fetch()) 
             {
                $Id = $DataRows["ID"];
@@ -128,20 +130,23 @@
                $Admin =  $DataRows["author"];
                $Image = $DataRows["image"];
                $PostText = $DataRows["post"];
-                    
+             $SR++;       
                  
                   
      ?><tbody>
          <tr>
-             <td>#<td>
-             <td><?php echo $PostTitle ?></td>
+             <td> <?php echo $SR ?><td>
+             <td class = "table-danger"><?php echo $PostTitle ?></td>
              <td><?php echo $Category ?></td>
              <td><?php echo $DateTime ?></td>
              <td><?php echo $Admin ?></td>
              <td><?php echo $Image ?></td>
              <td>Comments</td>
-             <td>Action</td>
-             <td>Live Preview</td>  
+             <td>
+                 <a href="#"><span class = "btn btn-warning">Edit</span></a>
+                 <a href="#"><span class = "btn btn-warning">Delete</span></a>
+             </td>
+             <td><a href="#"><span class = "btn btn-primary">Live Preview</span></a> </td>  
          </tr>
          </tbody>
      <?php   } ?>
